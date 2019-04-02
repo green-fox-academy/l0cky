@@ -1,1 +1,2 @@
 Second file
+Add a new line to change the content.
