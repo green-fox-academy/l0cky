@@ -1,4 +1,4 @@
-[C++ learning syllabus](https://github.com/green-fox-academy/radars-syllabus)
+[C++ learning syllabus by Green Fox Academy](https://github.com/green-fox-academy/radars-syllabus)
 
 
 My other repos:
