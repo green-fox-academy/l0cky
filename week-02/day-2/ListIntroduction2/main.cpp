@@ -36,14 +36,16 @@ int main() {
 
 
     //Add Kiwifruit to List A after the 4th element
-    listB.push_back("Kiwifruit");
+    listA.push_back("Kiwifruit");
 
 
     //Compare the size of List A and List B
     if (listA.size() == listB.size()) {
-        std::cout << listA.size() << " " << listB.size() << " List A is bigger." << std::endl;
-    } else {
+        std::cout << listA.size() << " " << listB.size() << " List A and B is equal." << std::endl;
+    } else if (listA.size() < listB.size()) {
         std::cout << listA.size() << " " << listB.size() << " List B is bigger." << std::endl;
+    } else {
+        std::cout << listA.size() << " " << listB.size() << " List A is bigger." << std::endl;
     }
 
     //Get the index of Avocado from List A
@@ -67,10 +69,7 @@ int main() {
 
 
     //Add Passion Fruit and Pummelo to List B in a single statement
-    std::vector<std::string> addVector{"Passion Fruit", "Pummelo"};
-    for (std::vector<std::string>::iterator it = addVector.begin(); it != addVector.end(); ++it) {
-        listB.push_back(*it);
-    }
+    listB.insert(listB.begin(), {"Passion Fruit", "Pummelo"});
 
     //Print out the 3rd element from List A
     std::cout << listA.at(2) << std::endl;
