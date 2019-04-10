@@ -30,12 +30,10 @@ void draw()
     // and draws a line from that point to the center of the canvas.
     // Draw at least 3 lines with that function. Use loop for that.
     std::pair<int, int> start = {220, 200};
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         toTheCenter(start);
         start.first += 90;
-        start.second += 90;
     }
-    toTheCenter(start);
 
 }
 
