@@ -46,6 +46,7 @@ void draw()
     SDL_Point startCoord = {10, 10};
 
     triangleFractal(startCoord, triangleLength);
+    //triangle(startCoord, triangleLength);
 
 }
 
@@ -61,17 +62,14 @@ SDL_Point thirdPointCoord(SDL_Point startCoord, int length)
 
 void triangle(SDL_Point startCoord, int length)
 {
-    SDL_RenderDrawLine(gRenderer,
-                       startCoord.x, startCoord.y,
-                       secondPointCoord(startCoord, length).x, secondPointCoord(startCoord, length).y);
+    SDL_Point triangleSidesCoordArr[4] = {
+            {startCoord.x, startCoord.y},
+            {secondPointCoord(startCoord, length).x, secondPointCoord(startCoord, length).y},
+            {thirdPointCoord(startCoord, length).x, thirdPointCoord(startCoord, length).y},
+            {startCoord.x, startCoord.y},
+    };
 
-    SDL_RenderDrawLine(gRenderer,
-                       secondPointCoord(startCoord, length).x, secondPointCoord(startCoord, length).y,
-                       thirdPointCoord(startCoord, length).x, thirdPointCoord(startCoord, length).y);
-
-    SDL_RenderDrawLine(gRenderer,
-                       thirdPointCoord(startCoord, length).x, thirdPointCoord(startCoord, length).y,
-                       startCoord.x, startCoord.y);
+    SDL_RenderDrawLines(gRenderer, triangleSidesCoordArr, 4);
 }
 
 void triangleFractal(SDL_Point startCoord, int length)
