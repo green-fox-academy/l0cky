@@ -9,14 +9,14 @@ const int SCREEN_HEIGHT = 800;
 //Draws geometry on the canvas
 void draw();
 
-std::pair<int, int> secondPointCoord(std::pair<int, int>, int);
+SDL_Point secondPointCoord(SDL_Point, int);
 
-std::pair<int, int> thirdPointCoord(std::pair<int, int>, int);
+SDL_Point thirdPointCoord(SDL_Point, int);
 
 // Draw triangle
-void triangle(std::pair<int, int>, int);
+void triangle(SDL_Point, int);
 
-void triangleFractal(std::pair<int, int>, int);
+void triangleFractal(SDL_Point, int);
 
 //Starts up SDL and creates window
 bool init();
@@ -43,38 +43,38 @@ void draw()
     //point.y;
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
     int triangleLength = 800;
-    std::pair<int, int> startCoord = {10, 10};
+    SDL_Point startCoord = {10, 10};
 
     triangleFractal(startCoord, triangleLength);
 
 }
 
-std::pair<int, int> secondPointCoord(std::pair<int, int> startCoord, int length)
+SDL_Point secondPointCoord(SDL_Point startCoord, int length)
 {
-    return {startCoord.first + length, startCoord.second};
+    return {startCoord.x + length, startCoord.y};
 }
 
-std::pair<int, int> thirdPointCoord(std::pair<int, int> startCoord, int length)
+SDL_Point thirdPointCoord(SDL_Point startCoord, int length)
 {
-    return {startCoord.first + length / 2, startCoord.second + sqrt(3) / 2 * length};
+    return {startCoord.x + length / 2, (int) (startCoord.y + sqrt(3) / 2 * length)};
 }
 
-void triangle(std::pair<int, int> startCoord, int length)
+void triangle(SDL_Point startCoord, int length)
 {
     SDL_RenderDrawLine(gRenderer,
-                       startCoord.first, startCoord.second,
-                       secondPointCoord(startCoord, length).first, secondPointCoord(startCoord, length).second);
+                       startCoord.x, startCoord.y,
+                       secondPointCoord(startCoord, length).x, secondPointCoord(startCoord, length).y);
 
     SDL_RenderDrawLine(gRenderer,
-                       secondPointCoord(startCoord, length).first, secondPointCoord(startCoord, length).second,
-                       thirdPointCoord(startCoord, length).first, thirdPointCoord(startCoord, length).second);
+                       secondPointCoord(startCoord, length).x, secondPointCoord(startCoord, length).y,
+                       thirdPointCoord(startCoord, length).x, thirdPointCoord(startCoord, length).y);
 
     SDL_RenderDrawLine(gRenderer,
-                       thirdPointCoord(startCoord, length).first, thirdPointCoord(startCoord, length).second,
-                       startCoord.first, startCoord.second);
+                       thirdPointCoord(startCoord, length).x, thirdPointCoord(startCoord, length).y,
+                       startCoord.x, startCoord.y);
 }
 
-void triangleFractal(std::pair<int, int> startCoord, int length)
+void triangleFractal(SDL_Point startCoord, int length)
 {
     triangle(startCoord, length);
     if (length < 10)
