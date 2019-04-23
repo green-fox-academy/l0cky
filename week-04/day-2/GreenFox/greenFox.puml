@@ -1,0 +1,109 @@
+@startuml
+
+class Person {
+    .. Data fields ..
+        {field} - _name : string
+        {field} - _age : int
+        {field} - _gender : Gender
+    __
+    .. Constructor ..
+        {method} + Person(name, age, gender)
+        {method} + Person()
+    .. Destructor ..
+            Person()
+    .. Getters ..
+        {method} + getName() : string
+        {method} + getAge() : int
+        {method} + getGenderAsString() : string
+    .. Methods ..
+        {method} + introduce() : virtual void
+        {method} + getGoal() : virtual void
+}
+
+class Student {
+    .. Data fields ..
+        {field} - _previousOrganization : string
+        {field} - _skippedDays : int
+    __
+    .. Constructor ..
+        {method} + Student(name, age, gender, previousOrganization)
+        {method} + Student()
+    .. Destructor ..
+        Student()
+    .. Getters ..
+        {method} + getPreviousOrganization() : string
+        {method} + getSkippedDays() : int
+    .. Methods ..
+        {method} + introduce() : void override
+        {method} + getGoal() : void override
+        {method} + skipDays(int) : void
+}
+
+class Mentor {
+    .. Data fields ..
+        {field} - _level : string
+    __
+    .. Constructor ..
+        {method} + Mentor(name, age, gender)
+        {method} + Mentor()
+    .. Destructor ..
+            Mentor()
+    .. Getter ..
+        {method} + getLevelAsString() : string
+    .. Methods ..
+        {method} + introduce() : void override
+        {method} + getGoal() : void override
+}
+
+class Sponsor {
+    .. Data fields ..
+        {field} - _company : string
+        {field} - _hiredStudents : int
+    __
+    .. Constructors ..
+        {method} + Sponsor(name, age, gender, company)
+        {method} + Sponsor()
+    .. Destructor ..
+            Sponsor()
+    .. Methods ..
+        {method} + introduce() : void override
+        {method} + getGoal() : void override
+        {method} + hire() : void
+}
+
+class Cohort {
+    .. Data fields ..
+        {field} - _name : string
+        {field} - _students : vector
+        {field} - _mentors : vector
+    __
+    .. Constructor ..
+        {method} + Cohort(name)
+    .. Destructor ..
+            Cohort()
+    .. Methods ..
+        {method} + addStudent(Student*) : void
+        {method} + addMentor(Mentor*) : void
+        {method} + info() : void
+}
+
+Person <|-- Student
+Person <|-- Mentor
+Person <|-- Sponsor
+
+
+Cohort "1" <-- "n" Student
+Cohort "1" <-- "n" Mentor
+
+enum Gender {
+    FEMALE
+    MALE
+}
+
+enum Level {
+    JUNIOR
+    INTERMEDIATE
+    SENIOR
+}
+
+@enduml
