@@ -1,0 +1,68 @@
+@startuml
+
+class Garden {
+    {field} - _plants : vector<Plant*>
+    .. Constructor ..
+        {method} + Garden()
+    .. Destructor ..
+        {method} + ~Garden()
+    .. Methods ..
+        {method} + addPlant(Plant*) : void
+        {method} + showGarden() : void
+        {method} + needWatering() : int
+        {method} + waterGarden(int) : void
+}
+
+class Plant {
+    {field} - _color : string
+    {field} - _wateringUnder : int
+    {field} - _absorbPercent : float
+    {field} - _watered : float
+    {field} - _plantType : Plants
+    __
+    .. Constructor ..
+        {method} + Plant(string)
+    .. Destructor ..
+        {method} + ~Plant()
+    .. Getters ..
+        {method} + getColor() : string
+        {method} + getWateringUnder() : int
+        {method} + getAbsorbPercent() : float
+        {method} + getWatered() : float
+        {method} + getPlantTypeAsString() : string
+    .. Setters ..
+
+        {method} + setWateringUnder(int) : void
+        {method} + setAbsorbPercent(float) : void
+        {method} + setWatered(float) : void
+        {method} + setPlantType(Plants) : void
+    .. Method ..
+        {method} + waterPlant(float) : void
+}
+
+class Flower {
+    .. Constructor ..
+        {method} + Flower(string)
+    .. Destructor ..
+        {method} + ~Flower()
+}
+
+class Tree {
+    .. Constructor ..
+        {method} + Tree(string)
+    .. Destructor ..
+        {method} + ~Tree()
+}
+
+enum Plants {
+    FLOWER,
+    TREE,
+    NOTSET
+}
+
+Plant <|-- Flower
+Plant <|-- Tree
+Garden "1" <-- "n" Flower
+Garden "1" <-- "n" Tree
+
+@enduml
