@@ -1,0 +1,59 @@
+@startuml
+
+abstract class Instrument {
+    {field} # _name : string
+    __
+    {abstract} + play() : void
+}
+
+abstract class StringedInstrument {
+    {field} # _numberOfStrings : int
+    __
+    .. Constructor ..
+        {method} + StringedInstrument()
+    .. Destructor ..
+        {method} + ~StringedInstrument()
+    .. Getter ..
+        {method} + getNameAsString() : string
+        {method} + getNumberOfStringsAsString() : string
+    ..
+    {method} + play() : void
+    {abstract} + sound() : void
+}
+
+class ElectricGuitar {
+    .. Constructor ..
+        {method} + ElectricGuitar(int)
+        {method} + ElectricGuitar()
+    .. Destructor ..
+        {method} + ~ElectricGuitar()
+    ..Method ..
+        {method} + sound() : string
+}
+
+class BassGuitar {
+    .. Constructor ..
+        {method} + BassGuitar(int)
+        {method} + BassGuitar()
+    .. Destructor ..
+        {method} + ~BassGuitar()
+    ..Method ..
+        {method} + sound() : string
+}
+
+class Violin {
+    .. Constructor ..
+        {method} + Violin(int)
+        {method} + Violin()
+    .. Destructor ..
+        {method} + ~Violin()
+    ..Method ..
+        {method} + sound() : string
+}
+
+Instrument <|-- StringedInstrument
+StringedInstrument <|-- ElectricGuitar
+StringedInstrument <|-- BassGuitar
+StringedInstrument <|-- Violin
+
+@enduml
