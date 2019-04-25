@@ -1,10 +1,8 @@
 #include <iostream>
 #include <gtest/gtest.h>
+#include "apple.cpp"
 
-std::string getApple(std::string name ="apple")
-{
-    return name;
-}
+
 
 TEST(getAppleFunction, returnsAppleString) {
     // Arrange
