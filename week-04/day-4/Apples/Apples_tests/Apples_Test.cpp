@@ -52,6 +52,15 @@ TEST(sumFunction, emptyVectorInParameter) {
     ASSERT_EQ(result, 0);
 }
 
+TEST(sumFunction, oneElementVectorInParameter) {
+    // Arrange
+    std::vector<int> temp{0};
+    //Act
+    int result = sum(temp);
+    //Assert
+    ASSERT_EQ(result, 0);
+}
+
 int main(int argc, char **argv) {
 
 	testing::InitGoogleTest(&argc, argv);
