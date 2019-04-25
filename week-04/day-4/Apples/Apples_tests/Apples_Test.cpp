@@ -43,6 +43,15 @@ TEST(sumFunction, returnWithExpectedSum) {
     ASSERT_EQ(result, 10);
 }
 
+TEST(sumFunction, emptyVectorInParameter) {
+    // Arrange
+    std::vector<int> temp{};
+    //Act
+    int result = sum(temp);
+    //Assert
+    ASSERT_EQ(result, 0);
+}
+
 int main(int argc, char **argv) {
 
 	testing::InitGoogleTest(&argc, argv);
