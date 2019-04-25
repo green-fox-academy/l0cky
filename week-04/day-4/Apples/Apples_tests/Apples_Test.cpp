@@ -61,6 +61,15 @@ TEST(sumFunction, oneElementVectorInParameter) {
     ASSERT_EQ(result, 0);
 }
 
+TEST(sumFunction, negativeNumberInVector) {
+    // Arrange
+    std::vector<int> temp{-1, 0, 1};
+    //Act
+    int result = sum(temp);
+    //Assert
+    ASSERT_EQ(result, 0);
+}
+
 int main(int argc, char **argv) {
 
 	testing::InitGoogleTest(&argc, argv);
