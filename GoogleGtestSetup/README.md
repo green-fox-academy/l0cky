@@ -12,9 +12,9 @@
 	2. Copy the addGtestS.sh int your project dir.
 	4. In the terminal navigate to the project folder.
 	3. Run addGtestS.sh:
-		```
+
 		./addGtestS.sh
-		```
+
 
 	note: add addGtestS.sh to your .gitignore.
 
@@ -25,6 +25,6 @@
 	3. Make a CLion project.
 	4. In the terminal navigate to the project folder.
 	5. Run addGtestS.sh:
-		```
+
 		addGtestS.sh
-		```
+		
