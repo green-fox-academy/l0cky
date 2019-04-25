@@ -15,25 +15,25 @@ echo -e "Initialize Google gtests for your ${GREEN}${PROJECT_NAME}${NC} CLion pr
 
 if [ -d ".idea" -a -e "main.cpp" ];
 then
-	echo -e "${RED}This is a CLion project folder.${NC}";
+  echo -e "${RED}This is a CLion project folder.${NC}";
 else
-	echo -e "This is not a CLion project folder.";
+  echo -e "This is not a CLion project folder.";
 fi
 
 if [ ! -d ${PROJECT_LIB}  ];
 then
-	mkdir ${PROJECT_LIB};
-	echo -e "\tCreated folder: ${GREEN}${PROJECT_LIB}${NC}";
+  mkdir ${PROJECT_LIB};
+  echo -e "\tCreated folder: ${GREEN}${PROJECT_LIB}${NC}";
 else
-	echo -e "\tFolder already exists:\t${RED}${PROJECT_LIB}${NC}";
+  echo -e "\tFolder already exists:\t${RED}${PROJECT_LIB}${NC}";
 fi
 
 if [ ! -d ${PROJECT_TESTS} ];
 then
-	mkdir ${PROJECT_TESTS}
-	echo -e "\tCreated folder: ${GREEN}${PROJECT_TESTS}${NC}";
+  mkdir ${PROJECT_TESTS}
+  echo -e "\tCreated folder: ${GREEN}${PROJECT_TESTS}${NC}";
 else
-	echo -e "\tFolder already exists:\t${RED}${PROJECT_TESTS}${NC}";
+  echo -e "\tFolder already exists:\t${RED}${PROJECT_TESTS}${NC}";
 fi
 
 LIB_CMAKELIST="${PROJECT_LIB}/CMakeLists.txt"
@@ -45,11 +45,11 @@ cat <<EOF >$LIB_CMAKELIST
 add_library(\${PROJECT_LIB_NAME} dummyClass.cpp)
 EOF
 
-	touch ${PROJECT_LIB}/dummyClass.cpp;
-	echo -e "\tCreated file: ${GREEN}${LIB_CMAKELIST}${NC}";
+  touch ${PROJECT_LIB}/dummyClass.cpp;
+  echo -e "\tCreated file: ${GREEN}${LIB_CMAKELIST}${NC}";
 
 else
-	echo -e "\tFolder already exists:\t${RED}${LIB_CMAKELIST}${NC}";
+  echo -e "\tFolder already exists:\t${RED}${LIB_CMAKELIST}${NC}";
 fi
 
 TESTS_CMAKELIST="${PROJECT_TESTS}/CMakeLists.txt"
@@ -73,10 +73,10 @@ target_link_libraries(\${PROJECT_TESTS_NAME} gtest gtest_main)
 target_link_libraries(\${PROJECT_TESTS_NAME} \${PROJECT_LIB_NAME})
 EOF
 
-	echo -e "\tCreated file: ${GREEN}${TESTS_CMAKELIST}${NC}";
+  echo -e "\tCreated file: ${GREEN}${TESTS_CMAKELIST}${NC}";
 
 else
-	echo -e "\tFolder already exists:\t${RED}${TESTS_CMAKELIST}${NC}";
+  echo -e "\tFolder already exists:\t${RED}${TESTS_CMAKELIST}${NC}";
 fi
 
 if [ ! -e "${PROJECT_TESTS}/${TEST_CPP}" ];
@@ -95,10 +95,10 @@ int main(int argc, char **argv) {
 
 EOF
 
-echo -e "\tCreated file: ${GREEN}${PROJECT_TESTS}/${TEST_CPP}${NC}";
+  echo -e "\tCreated file: ${GREEN}${PROJECT_TESTS}/${TEST_CPP}${NC}";
 
 else
-	echo -e "\tFolder already exists:\t${RED}${PROJECT_TESTS}/${TEST_CPP}${NC}";
+  echo -e "\tFolder already exists:\t${RED}${PROJECT_TESTS}/${TEST_CPP}${NC}";
 fi
 
 TEST_PROJECT_NAME=$(tail -1 CMakeLists.txt | grep -o "${PROJECT_NAME}")
@@ -107,10 +107,10 @@ if [ "${TEST_PROJECT_NAME}" == "${PROJECT_NAME}" ];
 then
 
   # Uncomment if you use Windows
-	#sed -i '$d' CMakeLists.txt;
+  #sed -i '$d' CMakeLists.txt;
 
   # Uncomment if you use Mac
-	sed -i '' -e '$ d' CMakeLists.txt;
+  #sed -i '' -e '$ d' CMakeLists.txt;
 
 cat <<EOF >>CMakeLists.txt
 # Change this to the name of the directory that contains your code
@@ -135,12 +135,10 @@ target_link_libraries(\${PROJECT_NAME} \${PROJECT_LIB_NAME})
 
 EOF
 
-echo -e "\tChanged file: ${GREEN}CMakeLists.txt${NC}";
+  echo -e "\tChanged file: ${GREEN}CMakeLists.txt${NC}";
 
 else
-	echo -e "${RED}\tThe CMakeLists.txt is not the default.${NC}";
+  echo -e "${RED}\tThe CMakeLists.txt is not the default.${NC}";
 fi
-
-
 
 exit 0
