@@ -34,6 +34,15 @@ TEST(getAppleFunction, faildWithDefault){
     ASSERT_NE(result, "banana");
 }
 
+TEST(sumFunction, returnWithExpectedSum) {
+    // Arrange
+    std::vector<int> temp{0,1,2,3,4};
+    //Act
+    int result = sum(temp);
+    //Assert
+    ASSERT_EQ(result, 10);
+}
+
 int main(int argc, char **argv) {
 
 	testing::InitGoogleTest(&argc, argv);
