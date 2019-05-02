@@ -17,7 +17,9 @@ int main()
             reverseLine(line);
         }
 
-    } catch (std::ifstream::failure& e) {
+        myFile.close();
+
+    } catch (std::ifstream::failure &e) {
         std::cout << e.what() << std::endl;
     }
 
