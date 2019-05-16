@@ -30,7 +30,7 @@ int main()
 
     fill_even_numbers(pointer, size);
     fill_odd_numbers(pointer2, size);
-    
+
     print_array_descend(merge_array(pointer, pointer2, size), size * 2);
 
     free(pointer);
@@ -69,14 +69,14 @@ int *fill_odd_numbers(int *pointer, size_t size)
 void print_array(int *pointer, size_t size)
 {
     for (int i = 0; i < size; ++i) {
-        printf("%i\n", pointer[i]);
+        printf("%d\n", pointer[i]);
     }
 }
 
 void print_array_descend(int *pointer, size_t size)
 {
     for (int i = size - 1; i > -1; --i) {
-        printf("%i\n", pointer[i]);
+        printf("%d\n", pointer[i]);
     }
 }
 
