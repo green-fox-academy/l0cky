@@ -30,7 +30,7 @@ int main()
 
     fill_even_numbers(pointer, size);
     fill_odd_numbers(pointer2, size);
-
+    
     print_array_descend(merge_array(pointer, pointer2, size), size * 2);
 
     free(pointer);
@@ -45,7 +45,7 @@ int main()
 
 int *create_int_array(int *pointer, size_t size)
 {
-    pointer = (int *) calloc(sizeof(int), size);
+    pointer = (int *) calloc(size, sizeof(int));
     return pointer;
 }
 
