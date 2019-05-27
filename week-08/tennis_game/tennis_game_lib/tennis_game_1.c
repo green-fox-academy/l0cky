@@ -19,6 +19,17 @@ int is_same_score(tennis_game_1_t *tennis_game)
     return tennis_game->m_score1 == tennis_game->m_score2 ? 1 : 0;
 }
 
+int get_longest_name(tennis_game_1_t *tennis_game)
+{
+    int longest_name = 0;
+    if (strlen(tennis_game->player1_name) > strlen(tennis_game->player2_name)) {
+        longest_name = strlen(tennis_game->player1_name);
+    } else {
+        longest_name = strlen(tennis_game->player2_name);
+    }
+    return longest_name;
+}
+
 void won_point_1(tennis_game_1_t *tennis_game, const char *player_name)
 {
     if (player_name == tennis_game->player1_name) {
@@ -30,12 +41,7 @@ void won_point_1(tennis_game_1_t *tennis_game, const char *player_name)
 
 char *get_score_1(tennis_game_1_t *tennis_game)
 {
-    int longest_name = 0;
-    if (strlen(tennis_game->player1_name) > strlen(tennis_game->player2_name)) {
-        longest_name = strlen(tennis_game->player1_name);
-    } else {
-        longest_name = strlen(tennis_game->player2_name);
-    }
+    int longest_name = get_longest_name(tennis_game);
 
     char *score = calloc(11 + longest_name, sizeof(char));
     int tempScore = 0;
