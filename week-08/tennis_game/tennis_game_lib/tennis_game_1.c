@@ -30,24 +30,7 @@ char *get_score_1(tennis_game_1_t *tennis_game)
     char *score = calloc(11 + longest_name, sizeof(char));
     int tempScore = 0;
     if (is_same_score(tennis_game)) {
-        switch (tennis_game->m_score1) {
-            case 0:
-                strcat(score, "Love-All");
-                break;
-            case 1:
-                strcat(score, "Fifteen-All");
-                break;
-            case 2:
-                strcat(score, "Thirty-All");
-                break;
-            case 3:
-                strcat(score, "Forty-All");
-                break;
-            default:
-                strcat(score, "Deuce");
-                break;
-
-        }
+        strcat(score, equal_score_string(tennis_game));
     } else if (tennis_game->m_score1 >= 4 || tennis_game->m_score2 >= 4) {
         int minusResult = tennis_game->m_score1 - tennis_game->m_score2;
         if (minusResult == 1) {
@@ -67,8 +50,7 @@ char *get_score_1(tennis_game_1_t *tennis_game)
         for (int i = 1; i < 3; i++) {
             if (i == 1) {
                 tempScore = tennis_game->m_score1;
-            }
-            else {
+            } else {
                 strcat(score, "-");
                 tempScore = tennis_game->m_score2;
             }
@@ -105,4 +87,21 @@ int get_longest_name(tennis_game_1_t *tennis_game)
         longest_name = strlen(tennis_game->player2_name);
     }
     return longest_name;
+}
+
+const char *equal_score_string(tennis_game_1_t *tennis_game)
+{
+    switch (tennis_game->m_score1) {
+        case 0:
+            return "Love-All";
+        case 1:
+            return "Fifteen-All";
+        case 2:
+            return "Thirty-All";
+        case 3:
+            return "Forty-All";
+        default:
+            return "Deuce";
+
+    }
 }
