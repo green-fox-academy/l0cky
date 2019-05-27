@@ -14,6 +14,11 @@ tennis_game_1_t create_tennis_game_1(const char *player1_name, const char *playe
     return result;
 }
 
+int is_same_score(tennis_game_1_t *tennis_game)
+{
+    return tennis_game->m_score1 == tennis_game->m_score2 ? 1 : 0;
+}
+
 void won_point_1(tennis_game_1_t *tennis_game, const char *player_name)
 {
     if (player_name == tennis_game->player1_name) {
@@ -34,7 +39,7 @@ char *get_score_1(tennis_game_1_t *tennis_game)
 
     char *score = calloc(11 + longest_name, sizeof(char));
     int tempScore = 0;
-    if (tennis_game->m_score1 == tennis_game->m_score2) {
+    if (is_same_score(tennis_game)) {
         switch (tennis_game->m_score1) {
             case 0:
                 strcat(score, "Love-All");
@@ -70,7 +75,9 @@ char *get_score_1(tennis_game_1_t *tennis_game)
         }
     } else {
         for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = tennis_game->m_score1;
+            if (i == 1) {
+                tempScore = tennis_game->m_score1;
+            }
             else {
                 strcat(score, "-");
                 tempScore = tennis_game->m_score2;
