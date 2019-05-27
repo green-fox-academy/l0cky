@@ -25,7 +25,14 @@ void won_point_1(tennis_game_1_t *tennis_game, const char *player_name)
 
 char *get_score_1(tennis_game_1_t *tennis_game)
 {
-    char *score = calloc(10, 1);
+    int longest_name = 0;
+    if (strlen(tennis_game->player1_name) > strlen(tennis_game->player2_name)) {
+        longest_name = strlen(tennis_game->player1_name);
+    } else {
+        longest_name = strlen(tennis_game->player2_name);
+    }
+
+    char *score = calloc(11 + longest_name, sizeof(char));
     int tempScore = 0;
     if (tennis_game->m_score1 == tennis_game->m_score2) {
         switch (tennis_game->m_score1) {
@@ -48,10 +55,19 @@ char *get_score_1(tennis_game_1_t *tennis_game)
         }
     } else if (tennis_game->m_score1 >= 4 || tennis_game->m_score2 >= 4) {
         int minusResult = tennis_game->m_score1 - tennis_game->m_score2;
-        if (minusResult == 1) strcat(score, "Advantage player1");
-        else if (minusResult == -1) strcat(score, "Advantage player2");
-        else if (minusResult >= 2) strcat(score, "Win for player1");
-        else strcat(score, "Win for player2");
+        if (minusResult == 1) {
+            strcat(score, "Advantage ");
+            strcat(score, tennis_game->player1_name);
+        } else if (minusResult == -1) {
+            strcat(score, "Advantage ");
+            strcat(score, tennis_game->player2_name);
+        } else if (minusResult >= 2) {
+            strcat(score, "Win for ");
+            strcat(score, tennis_game->player1_name);
+        } else {
+            strcat(score, "Win for ");
+            strcat(score, tennis_game->player2_name);
+        }
     } else {
         for (int i = 1; i < 3; i++) {
             if (i == 1) tempScore = tennis_game->m_score1;
