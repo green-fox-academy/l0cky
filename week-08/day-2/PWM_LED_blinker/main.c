@@ -57,6 +57,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 /* the timer's config structure */
 TIM_HandleTypeDef timer_handle;
+TIM_HandleTypeDef delay_handle;
 
 /* the output compare channel's config structure */
 TIM_OC_InitTypeDef pwm_config;
@@ -89,6 +90,20 @@ void init_timer()
 
     /* configuring the timer in PWM mode instead of calling HAL_TIM_Base_Init(&timer_handle) */
     HAL_TIM_PWM_Init(&timer_handle);
+}
+
+void init_delay_timer()
+{
+    __HAL_RCC_TIM3_CLK_ENABLE();
+
+    delay_handle.Instance = TIM3;
+    delay_handle.Init.Prescaler = 54000 - 1; // 108000000/108=1000000 -> speed of 1 count-up: 1/1000000 s = 0.001 ms
+    delay_handle.Init.Period = 2000 - 1; // 100 x 0.001 ms = 10 ms = 0.01 s period
+    delay_handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    delay_handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+
+    /* configuring the timer in PWM mode instead of calling HAL_TIM_Base_Init(&timer_handle) */
+    HAL_TIM_Base_Init(&delay_handle);
 }
 
 void init_PWM()
@@ -137,10 +152,13 @@ int main(void)
     /* USER CODE BEGIN 2 */
     init_LED();
     init_timer();
+    init_delay_timer();
     init_PWM();
 
     // Start the timer for PWM
     HAL_TIM_PWM_Start(&timer_handle, TIM_CHANNEL_1);
+
+    HAL_TIM_Base_Start(&delay_handle);
 
     /* USER CODE END 2 */
 
@@ -148,22 +166,23 @@ int main(void)
     /* USER CODE BEGIN WHILE */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
-    uint8_t up = 1;
-    uint8_t down = 0;
+    uint8_t up = 0;
+
+    uint16_t delay_value = 0;
 
     while (1) {
         /* USER CODE END WHILE */
         // We can set the compare value (the pulse width of the signal) like this:
-        // up
-        for (uint8_t i = 0; i < 10; ++i) {
-            __HAL_TIM_SET_COMPARE(&timer_handle, TIM_CHANNEL_1, i * 10);
-            HAL_Delay(150);
+
+        delay_value = __HAL_TIM_GET_COUNTER(&delay_handle);
+
+        if (delay_value == up * 200) {
+            __HAL_TIM_SET_COMPARE(&timer_handle, TIM_CHANNEL_1, up * 8);
         }
-        // down
-        for (uint8_t i = 10; i > 0; --i) {
-            __HAL_TIM_SET_COMPARE(&timer_handle, TIM_CHANNEL_1, i * 10);
-            HAL_Delay(150);
-        }
+
+        up++;
+
+        if (up == 6) up =0;
         /* USER CODE BEGIN 3 */
     }
 
