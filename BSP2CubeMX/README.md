@@ -1,7 +1,7 @@
 ## Prerequisities
 
-`gem install rake`
-`gem install fileutils`
+- `gem install rake`
+- `gem install fileutils`
 
 ## Before use
 
